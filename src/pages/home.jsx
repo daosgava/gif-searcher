@@ -8,7 +8,7 @@ import GifsContext from "../context/bookmarks/BookmarksContext";
 
 const Home = () => {
   const [data, setData] = useState([]);
-  const { updateBookmarks } = useContext(GifsContext);
+  const { bookmarks, updateBookmarks } = useContext(GifsContext);
 
   const handleSearchByKeyword = useCallback(async (keyword) => {
     try {
@@ -19,13 +19,13 @@ const Home = () => {
         title,
         username,
         image: images.fixed_width.url,
-        isChecked: false,
+        isChecked: bookmarks.some((gif) => gif.id === id),
       }));
       setData(newGifs);
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [bookmarks]);
 
   const handleUpdateGifs = (newGif) => {
     const newUpdate = data.map((gif) =>
