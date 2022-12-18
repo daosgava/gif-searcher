@@ -29,11 +29,9 @@ const Gif = ({ url, title, username, isChecked, isBookmarks, onClick }) => (
       onClick={onClick}
     />
     <Image src={url} alt={title} h="130px" w="200px" objectFit="cover" />
-    <Stack spacing="3">
-      <Box h="10px">
-        {title ? <Text>{title.slice(0, 20)}...</Text> : <>No title</>}
-      </Box>
-      <Box>{username ? <Text>{username}</Text> : <>Anonymous</>}</Box>
+    <Stack spacing="2">
+      <Text fontWeight="600">{title ? title.slice(0, 20) : "No title"}</Text>
+      <Text>{username ? username : "Anonymous"}</Text>
     </Stack>
   </Box>
 );

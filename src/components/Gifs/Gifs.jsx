@@ -1,7 +1,7 @@
-import { Wrap, WrapItem } from "@chakra-ui/react";
+import { Wrap, WrapItem, Text } from "@chakra-ui/react";
 import Gif from "./Gif";
 
-const Gifs = ({ data, updateGifs, isBookmarks = false, }) => {
+const Gifs = ({ data, updateGifs, isBookmarks = false }) => {
   const handleOnClick = (gif) => () => {
     updateGifs(gif);
   };
@@ -22,13 +22,17 @@ const Gifs = ({ data, updateGifs, isBookmarks = false, }) => {
                 image,
                 title,
                 username,
-                isChecked
+                isChecked,
               })}
             />
           </WrapItem>
         ))
       ) : (
-        <WrapItem>{isBookmarks ? "No bookmarks" : "No results"}</WrapItem>
+        <WrapItem>
+          <Text fontStyle="oblique">
+            {isBookmarks ? "No bookmarks..." : "No results..."}
+          </Text>
+        </WrapItem>
       )}
     </Wrap>
   );

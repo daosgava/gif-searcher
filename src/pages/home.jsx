@@ -1,5 +1,5 @@
 import { useState, useCallback, useContext } from "react";
-import { Flex, Center } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { GiphyApi } from "../services";
 import Gifs from "../components/Gifs";
@@ -10,22 +10,25 @@ const Home = () => {
   const [data, setData] = useState([]);
   const { bookmarks, updateBookmarks } = useContext(GifsContext);
 
-  const handleSearchByKeyword = useCallback(async (keyword) => {
-    try {
-      const res = await GiphyApi.searchByKeyword(keyword);
-      const { data } = await res.json();
-      const newGifs = data.map(({ id, title, username, images }) => ({
-        id,
-        title,
-        username,
-        image: images.fixed_width.url,
-        isChecked: bookmarks.some((gif) => gif.id === id),
-      }));
-      setData(newGifs);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [bookmarks]);
+  const handleSearchByKeyword = useCallback(
+    async (keyword) => {
+      try {
+        const results = await GiphyApi.searchByKeyword(keyword);
+        const { data } = await results.json();
+        const newGifs = data.map(({ id, title, username, images }) => ({
+          id,
+          title,
+          username,
+          image: images.fixed_width.url,
+          isChecked: bookmarks.some((gif) => gif.id === id),
+        }));
+        setData(newGifs);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [bookmarks]
+  );
 
   const handleUpdateGifs = (newGif) => {
     const newUpdate = data.map((gif) =>
@@ -37,13 +40,18 @@ const Home = () => {
 
   return (
     <>
-      <Flex flexDirection="row" gap="20px" justifyContent="center">
+      <Flex
+        flexDirection="row"
+        gap="30px"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Searcher searchByKeyword={handleSearchByKeyword} />
-        <Center>
-          <Link fontSize="12px" textDecoration="underline" to={`bookmarks`}>
+        <Link to={`bookmarks`}>
+          <Text fontSize="12px" textDecoration="underline" fontWeight="600">
             My Saved Gifs
-          </Link>
-        </Center>
+          </Text>
+        </Link>
       </Flex>
       <Gifs data={data} updateGifs={handleUpdateGifs} />
     </>

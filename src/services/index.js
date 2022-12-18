@@ -1,1 +1,1 @@
-export { default as GiphyApi } from './GiphyApi';
+export { default as GiphyApi } from "./GiphyApi";

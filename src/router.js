@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         element: <Bookmarks />,
       },
     ],
-  }
+  },
 ]);
 
 export default router;

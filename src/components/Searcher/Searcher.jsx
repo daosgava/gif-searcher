@@ -6,6 +6,7 @@ import { useDebounce } from "../../hooks";
 const Searcher = ({ searchByKeyword }) => {
   const [value, setValue] = useState("");
   const debouncedValue = useDebounce(value, 500);
+
   const handleOnChange = (e) => {
     const { value } = e.target;
     setValue(value);
@@ -21,7 +22,7 @@ const Searcher = ({ searchByKeyword }) => {
         pointerEvents="none"
         children={<SearchIcon color="gray.300" />}
       />
-      <Input placeholder="Search a GIF" onChange={handleOnChange} />
+      <Input placeholder="Type a keyword" onChange={handleOnChange} />
     </InputGroup>
   );
 };
