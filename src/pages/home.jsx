@@ -49,7 +49,7 @@ const Home = () => {
         <Searcher searchByKeyword={handleSearchByKeyword} />
         <Link to={`bookmarks`}>
           <Text fontSize="12px" textDecoration="underline" fontWeight="600">
-            My Saved Gifs
+            My Saved GIFS
           </Text>
         </Link>
       </Flex>
